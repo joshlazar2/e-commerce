@@ -72,7 +72,7 @@ const AddProduct = () => {
                     </div>
                     <div className='flex items-center space-x-4 justify-center'>
                         <label className=" text-blue-500 font-bold">Category:</label>
-                        <select nameName="category" onChange={changeHandler} >
+                        <select name="category" onChange={changeHandler} >
                             <option value="Electronics">Electronics</option>
                             <option value="Watches">Watches</option>
                             <option value="Clothes">Clothes</option>

@@ -57,17 +57,34 @@ module.exports = {
     },
     editProduct: async (req, res) => {
         try {
-            const image = `http://localhost:8000/uploads/${req.file.filename}`;
+            let updateFields = { ...req.body };
+    
+            // Check if a new image file is uploaded
+            if (req.file) {
+                const image = `http://localhost:8000/uploads/${req.file.filename}`;
+                updateFields.image = image;
+            }
+    
             const product = await Product.findOneAndUpdate(
                 { _id: req.params.id },
-                { ...req.body, image: image },
+                updateFields,
                 { new: true, runValidators: true }
-            )
-            res.status(200).json(product)
-        }
-        catch (err) {
+            );
+            
+            res.status(200).json(product);
+        } catch (err) {
             console.error(err);
-            res.status(500).json({ error: 'An error occurred while retrieving product.' });
+            res.status(500).json({ error: 'An error occurred while updating product.' });
+        }
+    },
+    deleteProduct: async (req, res) => {
+        try{
+            const result = await Product.deleteOne({ _id: req.params.id })
+            res.status(200).json(result)
+        }
+        catch(err){
+            console.log(err)
+            res.status(500).json({ error: 'An error occured while attempting to delete the product.' })
         }
     }
 };

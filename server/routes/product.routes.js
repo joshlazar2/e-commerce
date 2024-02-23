@@ -23,4 +23,5 @@ module.exports = app => {
     app.get('/api/oneProduct/:id', ProductController.findOneProduct);
     app.get('/api/oneCategory/:category', ProductController.productsByCategory);
     app.post('/api/editProduct/:id', authenticate, upload.single('image'), ProductController.editProduct);
+    app.delete('/api/deleteProduct/:id', authenticate, ProductController.deleteProduct);
 }

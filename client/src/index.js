@@ -7,8 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { store, persistor } from './app/store';
-import { disableReactDevTools } from '@fvilers/disable-react-devtools'
-import { processResult } from 'immer/dist/internal';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

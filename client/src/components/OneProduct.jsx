@@ -43,6 +43,18 @@ const OneProduct = () => {
 
     const cart = useSelector(state => state.items);
 
+    const deleteHandler = () => {
+        axios
+            .delete(`http://localhost:8000/api/deleteProduct/${id}`, { withCredentials: true })
+            .then((res) => {
+                console.log(res)
+                navigate('/home')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-slate-100">
             <div className="flex flex-col p-6 m-3 space-y-10 bg-white rounded-2xl shadow-2xl md:flex-row md:space-y-0 md:space-x-10 md:m-0 md:p-16">
@@ -63,6 +75,11 @@ const OneProduct = () => {
                         {
                             user.owner ?
                             <Link to={`/editProduct/${product._id}`}><button className="w-full h-10 duration-150 bg-blue-500 text-white rounded-lg hover:bg-blue-700 hover:shadow-lg" >Edit Product</button></Link> :
+                            null
+                        }
+                        {
+                            user.owner?
+                            <button onClick={deleteHandler} className="w-full h-10 duration-150 bg-red-500 text-white rounded-lg hover:bg-red-700 hover:shadow-lg" button>Delete Product</button>:
                             null
                         }
                     </div>
